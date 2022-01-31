@@ -13,12 +13,12 @@ import shrimp from './images/shrimp.png';
 class App extends Component {
   state = {
     cards: [
-      {id : 0, nome: "California", immagine: california, prezzo: 1.99},
-      {id : 1, nome: "Dragon", immagine: dragon, prezzo: 1.99},
-      {id : 2, nome: "Dynamite", immagine: dynamite, prezzo: 1.99},
-      {id : 3, nome: "Philadelphia", immagine: philadelphia, prezzo: 1.99},
-      {id : 4, nome: "Rainbow", immagine: rainbow, prezzo: 1.99},
-      {id : 5, nome: "Shrimp", immagine: shrimp, prezzo: 1.99}
+      {id : 0, nome: "California", immagine: california, prezzo: 1.99, quantità: 0},
+      {id : 1, nome: "Dragon", immagine: dragon, prezzo: 1.99, quantità: 0},
+      {id : 2, nome: "Dynamite", immagine: dynamite, prezzo: 1.99, quantità: 0},
+      {id : 3, nome: "Philadelphia", immagine: philadelphia, prezzo: 1.99, quantità: 0},
+      {id : 4, nome: "Rainbow", immagine: rainbow, prezzo: 1.99, quantità: 0},
+      {id : 5, nome: "Shrimp", immagine: shrimp, prezzo: 1.99, quantità: 0}
     ]
   }
 
@@ -26,6 +26,16 @@ handleDelete = cardID => {
   const updatedCards = this.state.cards.filter(card => card.id !== cardID)
   this.setState({cards: updatedCards})
 }
+
+handleIncrement = card => {
+  const updatedCards = [...this.state.cards];
+  const id = updatedCards.indexOf(card);
+  updatedCards[id] = {...card};
+  updatedCards[id].quantità++;
+  this.setState({cards: updatedCards})
+}
+
+
 
   render() {
     return (
@@ -39,6 +49,7 @@ handleDelete = cardID => {
               <Card
                 key={card.id}
                 onDelete={this.handleDelete}
+                onIncrement={this.handleIncrement}
                 card={card} />
             ))}
           </div>
