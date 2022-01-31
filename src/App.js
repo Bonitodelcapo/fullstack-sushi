@@ -19,9 +19,14 @@ class App extends Component {
       {id : 3, nome: "Philadelphia", immagine: philadelphia, prezzo: 1.99},
       {id : 4, nome: "Rainbow", immagine: rainbow, prezzo: 1.99},
       {id : 5, nome: "Shrimp", immagine: shrimp, prezzo: 1.99}
-
     ]
   }
+
+handleDelete = cardID => {
+  const updatedCards = this.state.cards.filter(card => card.id !== cardID)
+  this.setState({cards: updatedCards})
+}
+
   render() {
     return (
       <>
@@ -33,6 +38,7 @@ class App extends Component {
             {this.state.cards.map(card => (
               <Card
                 key={card.id}
+                onDelete={this.handleDelete}
                 card={card} />
             ))}
           </div>
